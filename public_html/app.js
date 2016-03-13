@@ -11,6 +11,12 @@ var app = angular
         })
         .controller('WorkDetailCtrl', function ($scope, $uibModal, $compile) {
 
+            $scope.filterLoad = function () {
+                deletePreviousLoad();
+                load();
+            };
+
+
             $scope.animationsEnabled = true;
 
             $scope.open = function (size, index) {
@@ -35,61 +41,67 @@ var app = angular
                 });
             };
 
-            $(function () {
-                var total = 8;
-                var loaded = 0;
-                var toLoad = 6;
-                var load = function () {
-                    for (var i = loaded; i < loaded + toLoad && i < total; i++)
-                    {
-                        var folderName = $scope.work[i]["folderName"];
-                        var projectName = $scope.work[i]["projectName"];
+            //loading logic
+            var total;
+            var loaded = 0;
+            var toLoad = 6;
+            var deletePreviousLoad = function () {
+                loaded = 0;
+                toLoad = 6;
+                $('#loading-area').html('');
+                $('#load-more').show();
+            };
+            var load = function () {
+                for (var i = loaded; i < loaded + toLoad && i < total; i++)
+                {
+                    var folderName = $scope.work[i]["folderName"];
+                    var projectName = $scope.work[i]["projectName"];
 
-                        var $wrapper = $('<div class=" col-sm-6 col-md-4 col-lg-4" style="padding:0;">');
-                        var $grid = $('<div class="grid">');
-                        var $fig = $('<figure class="effect-apollo">');//new
-                        $grid.append($fig);
-                        var $figcap = $('<figcaption>');
-                        $figcap.append('<h2><span>' + projectName + '</span></h2>');
-                        //$figcap.append('<p>Apollo\'s last game of pool was so strange.</p>');
-                        $figcap.append('<a  ng-click="open(\'lg\', ' + i + ')">View more</a>');
-                        $fig.append($figcap);
+                    var $wrapper = $('<div class=" col-sm-6 col-md-4 col-lg-4" style="padding:0;">');
+                    var $grid = $('<div class="grid">');
+                    var $fig = $('<figure class="effect-apollo">');//new
+                    $grid.append($fig);
+                    var $figcap = $('<figcaption>');
+                    $figcap.append('<h2><span>' + projectName + '</span></h2>');
+                    //$figcap.append('<p>Apollo\'s last game of pool was so strange.</p>');
+                    $figcap.append('<a  ng-click="open(\'lg\', ' + i + ')">View more</a>');
+                    $fig.append($figcap);
 
-                        var $img = $('<img class="bttrlazyloading">');
+                    var $img = $('<img class="bttrlazyloading">');
 
-                        $fig.append($img);
-                        $wrapper.append($grid);
-                        //$wrapper.append($img);
+                    $fig.append($img);
+                    $wrapper.append($grid);
+                    //$wrapper.append($img);
 
-                        $compile($wrapper)($scope);
-                        $('#loading-area').append($wrapper);
-                        $img.bttrlazyloading({
-                            container: '#loading-area',
-                            delay: 1000,
-                            lg: {
-                                src: "./images/work/" + folderName + "/Thumbnail.jpg"
-                            }
-                        });
-                    }
+                    $compile($wrapper)($scope);
+                    $('#loading-area').append($wrapper);
+                    $img.bttrlazyloading({
+                        container: '#loading-area',
+                        delay: 1000,
+                        lg: {
+                            src: "./images/work/" + folderName + "/Thumbnail.jpg"
+                        }
+                    });
+                }
 
-                    loaded += toLoad;
+                loaded += toLoad;
 
-                    if (loaded >= total) {
-                        $('#load-more').hide();
-                    }
-                };
-                $('#load-more').click(function (e) {
-                    load();
-                });
-                // Initial load
-                $.ajax({
-                    url: "data.json"
-                }).done(function (data) {
-                    $scope.work = data;
-                    total = $scope.work.length;
-                    load();
-                });
+                if (loaded >= total) {
+                    $('#load-more').hide();
+                }
+            };
+            $('#load-more').click(function (e) {
+                load();
             });
+            // Initial load
+            $.ajax({
+                url: "data.json"
+            }).done(function (data) {
+                $scope.work = data;
+                total = $scope.work.length;
+                load();
+            });
+
         })
         .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, work, index) {
             $scope.index = index;
