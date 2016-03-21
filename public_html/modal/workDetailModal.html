@@ -16,9 +16,17 @@
                                     <h4>Slide {{slide.id}}</h4>
                                 </div>-->
                 </uib-slide>
+            </uib-carousel>
         </div>
     </div>
-</uib-carousel>
+
+    <div class="row" ng-show="work[index]['video']">
+        <div class="col-lg-8 col-lg-offset-2">
+            <fluidvids video="http://player.vimeo.com/video/{{work[index]['video']}}?api=1&player_id=player1&title=0&byline=0&portrait=0" height="281" width="500">
+
+            </fluidvids>
+        </div>
+    </div>
 
 </div>
 <!--<div class="modal-footer">

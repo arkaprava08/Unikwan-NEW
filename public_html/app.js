@@ -1,5 +1,5 @@
 var app = angular
-        .module('app', ['ngRoute', 'ui.bootstrap'])
+        .module('app', ['ngRoute', 'ui.bootstrap', 'ngSanitize'])
         .config(config)
         .run(run)
         .controller('appController', function ($rootScope, $scope, $location) {
@@ -44,7 +44,7 @@ var app = angular
             //loading logic
             var total;
             var loaded = 0;
-            var toLoad = 6;
+            var toLoad = 9;
             var deletePreviousLoad = function () {
                 loaded = 0;
                 toLoad = 6;
@@ -103,9 +103,10 @@ var app = angular
             });
 
         })
-        .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, work, index) {
+        .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, work, index, $sce) {
             $scope.index = index;
             $scope.work = work;
+
 
             $scope.ok = function () {
                 $uibModalInstance.close();
@@ -136,11 +137,29 @@ var app = angular
             for (var i = 0; i < noOfItems; i++) {
                 $scope.addSlide();
             }
+        })
+        .directive('fluidvids', function () {
+            return {
+                restrict: 'EA',
+                replace: true,
+                transclude: true,
+                scope: {
+                    video: '@'
+                },
+                template: '<div class="fluidvids">' +
+                        '<iframe ng-src="{{ video }}" frameborder=\'0\'></iframe>' +
+                        '</div>',
+                link: function (scope, element, attrs) {
+                    var ratio = (attrs.height / attrs.width) * 100;
+                    element[0].style.paddingTop = ratio + '%';
+                }
+            };
         });
 
 
-config.$inject = ['$routeProvider'];
-function config($routeProvider) {
+config.$inject = ['$routeProvider', '$sceDelegateProvider'];
+function config($routeProvider, $sceDelegateProvider) {
+
     $routeProvider
             .when('/homepage', {
                 controller: 'HomePageController',
@@ -166,6 +185,9 @@ function config($routeProvider) {
                 templateUrl: 'views/workDetail.view.html'
             })
             .otherwise({redirectTo: '/homepage'});
+    
+    
+    $sceDelegateProvider.resourceUrlWhitelist(['self','http://player.vimeo.com/video/**']);
 }
 
 run.$inject = ['$rootScope', '$location'];
