@@ -5,10 +5,9 @@
         <group>
             <file>file:/Users/arkaprav/NetBeansProjects/Unikwan/public_html/views/work.view.html</file>
             <file>file:/Users/arkaprav/NetBeansProjects/Unikwan/public_html/views/contact.view.html</file>
-            <file>file:/Users/arkaprav/NetBeansProjects/Unikwan/public_html/css/stylesheet.css</file>
-            <file>file:/Users/arkaprav/NetBeansProjects/Unikwan/public_html/data.json</file>
-            <file>file:/Users/arkaprav/NetBeansProjects/Unikwan/public_html/modal/workDetailModal.html</file>
             <file>file:/Users/arkaprav/NetBeansProjects/Unikwan/public_html/app.js</file>
+            <file>file:/Users/arkaprav/NetBeansProjects/Unikwan/public_html/modal/careerDetail.html</file>
+            <file>file:/Users/arkaprav/NetBeansProjects/Unikwan/public_html/views/homepage.view.html</file>
             <file>file:/Users/arkaprav/NetBeansProjects/Unikwan/public_html/index.html</file>
         </group>
     </open-files>

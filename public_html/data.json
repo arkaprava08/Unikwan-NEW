@@ -2,116 +2,139 @@
     {
         "folderName": "Arkin",
         "projectName": "Arkin",
-        "video": 127231540
+        "video": 127231540,
+        "category": "Videos"
     },
     {
         "folderName": "Lensbricks video",
         "projectName": "Lensbricks",
-        "video": 109419199
+        "video": 109419199,
+        "category": "Videos"
     },
     {
         "folderName": "Eigen Prism",
         "projectName": "Eigen Prism",
-        "video": 128080467
+        "video": 128080467,
+        "category": "Videos"
     },
     {
         "folderName": "eMLE",
         "projectName": "eMLE",
-        "video": 127231540
+        "video": 127231540,
+        "category": "Videos"
     },
     {
         "folderName": "Light Metrics",
         "projectName": "Light Metrics",
-        "video": 124276825
+        "video": 124276825,
+        "category": "Videos"
     },
     {
         "folderName": "KIBA",
         "projectName": "KIBA",
-        "video": 140883335
+        "video": 140883335,
+        "category": "Videos"
     },
     {
         "folderName": "Unikwan 1",
         "projectName": "Unikwan",
-        "video": 112440858
+        "video": 112440858,
+        "category": "Videos"
     },
     {
         "folderName": "Unikwan 2",
         "projectName": "Unikwan",
-        "video": 127231540
+        "video": 127231540,
+        "category": "Videos"
     },
     {
         "folderName": "Treatcard",
         "projectName": "Treatcard",
-        "video": 127231540
+        "video": 127231540,
+        "category": "Videos"
     },
     {
         "folderName": "PE",
         "projectName": "PE",
-        "video": 127231540
+        "video": 127231540,
+        "category": "Videos"
     },
     {
         "folderName": "Mora Saiyaa",
         "projectName": "Mora Saiyaa",
-        "video": 127231540
+        "video": 127231540,
+        "category": "Videos"
     },
     {
         "folderName": "Abacus",
         "projectName": "Abacus",
-        "images": 4
+        "images": 4,
+        "category": "UX/UI"
     },
     {
         "folderName": "Fin 1",
         "projectName": "Fin 1",
-        "images": 3
+        "images": 3,
+        "category": "UX/UI"
     },
     {
         "folderName": "GE",
         "projectName": "GE",
-        "images": 3
+        "images": 3,
+        "category": "UX/UI"
     },
     {
         "folderName": "Honey pot",
         "projectName": "Honey Pot",
-        "images": 3
+        "images": 3,
+        "category": "UX/UI"
     },
     {
         "folderName": "I-revo",
         "projectName": "I revo",
-        "images": 3
+        "images": 3,
+        "category": "UX/UI"
     },
     {
         "folderName": "LENSBRICKS",
         "projectName": "Fin 1",
-        "images": 3
+        "images": 3,
+        "category": "UX/UI"
     },
     {
         "folderName": "NAGARA",
         "projectName": "Fin 1",
-        "images": 3
+        "images": 3,
+        "category": "UX/UI"
     },
     {
         "folderName": "M7 UI",
         "projectName": "M7 UI",
-        "images": 3
+        "images": 3,
+        "category": "UX/UI"
     },
     {
         "folderName": "Mrf",
         "projectName": "MRF",
-        "images": 3
+        "images": 3,
+        "category": "UX/UI"
     },
     {
         "folderName": "cloveimages",
         "projectName": "CLOVE",
-        "images": 3
+        "images": 3,
+        "category": "UX/UI"
     },
     {
         "folderName": "imagesforcaliedo",
         "projectName": "CALIEDO",
-        "images": 3
+        "images": 3,
+        "category": "UX/UI"
     },
     {
         "folderName": "rebrickandbytethumbnails",
         "projectName": "BRICK AND BYTE",
-        "images": 3
+        "images": 3,
+        "category": "UX/UI"
     }
 ]

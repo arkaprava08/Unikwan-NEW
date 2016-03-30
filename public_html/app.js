@@ -11,9 +11,23 @@ var app = angular
         })
         .controller('WorkDetailCtrl', function ($scope, $uibModal, $compile) {
 
-            $scope.filterLoad = function () {
+            $scope.filterLoad = function (category) {
                 deletePreviousLoad();
-                load();
+
+                $.ajax({
+                    url: "data.json"
+                }).done(function (data) {
+                    $scope.work = [];
+                    for (var i = 0; i < data.length; i++) {
+                        if (category === 'All') {
+                            $scope.work.push(data[i]);
+                        } else if (category === data[i]["category"]) {
+                            $scope.work.push(data[i]);
+                        }
+                    }
+                    total = $scope.work.length;
+                    load();
+                });
             };
 
 
@@ -44,10 +58,10 @@ var app = angular
             //loading logic
             var total;
             var loaded = 0;
-            var toLoad = 9;
+            var toLoad = 8;
             var deletePreviousLoad = function () {
                 loaded = 0;
-                toLoad = 6;
+                toLoad = 8;
                 $('#loading-area').html('');
                 $('#load-more').show();
             };
@@ -57,9 +71,9 @@ var app = angular
                     var folderName = $scope.work[i]["folderName"];
                     var projectName = $scope.work[i]["projectName"];
 
-                    var $wrapper = $('<div class=" col-sm-6 col-md-4 col-lg-4" style="padding:0;">');
+                    var $wrapper = $('<div class=" col-sm-6 col-md-3 col-lg-3" style="padding:0;">');
                     var $grid = $('<div class="grid">');
-                    var $fig = $('<figure class="effect-apollo">');//new
+                    var $fig = $('<figure class="effect-apollo">');
                     $grid.append($fig);
                     var $figcap = $('<figcaption>');
                     $figcap.append('<h2><span>' + projectName + '</span></h2>');
@@ -154,6 +168,49 @@ var app = angular
                     element[0].style.paddingTop = ratio + '%';
                 }
             };
+        })
+        .controller('ContactCtrl', function ($scope, $uibModal, $compile) {
+            $scope.open = function (size) {
+                var modalInstance = $uibModal.open({
+                    animation: $scope.animationsEnabled,
+                    templateUrl: 'modal/careerDetail.html',
+                    controller: 'CareerDetailModalInstanceCtrl',
+                    size: size,
+                    backdrop: false
+                });
+
+                modalInstance.result.then(function () {
+
+                }, function () {
+
+                });
+            };
+        })
+        .controller('CareerDetailModalInstanceCtrl', function ($scope, $uibModalInstance) {
+            $scope.ok = function () {
+                $uibModalInstance.close();
+            };
+
+            $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+        })
+        .controller('HomepageCtrl', function ($scope, $uibModal, $compile) {
+            $scope.open = function (size) {
+                var modalInstance = $uibModal.open({
+                    animation: $scope.animationsEnabled,
+                    templateUrl: 'modal/careerDetail.html',
+                    controller: 'CareerDetailModalInstanceCtrl',
+                    size: size,
+                    backdrop: false
+                });
+
+                modalInstance.result.then(function () {
+
+                }, function () {
+
+                });
+            };
         });
 
 
@@ -185,9 +242,9 @@ function config($routeProvider, $sceDelegateProvider) {
                 templateUrl: 'views/workDetail.view.html'
             })
             .otherwise({redirectTo: '/homepage'});
-    
-    
-    $sceDelegateProvider.resourceUrlWhitelist(['self','http://player.vimeo.com/video/**']);
+
+
+    $sceDelegateProvider.resourceUrlWhitelist(['self', 'http://player.vimeo.com/video/**']);
 }
 
 run.$inject = ['$rootScope', '$location'];

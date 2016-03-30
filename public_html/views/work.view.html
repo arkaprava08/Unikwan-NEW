@@ -8,16 +8,17 @@
         <div class="col-lg-12">
             <ul class="work-list">
                 <li>
-                    <a>All</a>
+                    <a ng-click="filterLoad('All')">All</a>
                 </li>
                 <li>
-                    <a ng-click="filterLoad()">UX/UI</a>
+                    <a ng-click="filterLoad('UX/UI')">UX/UI</a>
                 </li>
+                <!--                <li>
+                                    <a>Motion Design</a>
+                                </li>
+                -->                
                 <li>
-                    <a>Motion Design</a>
-                </li>
-                <li>
-                    <a>Videos</a>
+                    <a ng-click="filterLoad('Videos')">Videos</a>
                 </li>
             </ul>
         </div>

@@ -92,6 +92,10 @@ a{
     margin-top: 2em;
 }
 
+.arrow {
+    cursor: pointer;
+}
+
 .arrow::after {
     background-image: url(../images/arrow.png);
     background-size: 12px;
@@ -384,7 +388,7 @@ figure.effect-apollo:hover p {
     margin: 0 auto;
     list-style: none;
     overflow: hidden;
-    height: 450px;
+    height: 350px;
 }
 
 /* Common style */
