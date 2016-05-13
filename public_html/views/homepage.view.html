@@ -47,18 +47,11 @@
         </div>
         <div class="col-md-12">
             <div class="row">
-                <h4 class="col-md-6 arrow bold-text" ng-click="open('lg')">
-                    Product & Service Innovation
-                </h4>
-                <h4 class="col-md-6 arrow bold-text" ng-click="open('lg')">
-                    User Experience Design
-                </h4>
-                <h4 class="col-md-6 arrow bold-text" ng-click="open('lg')">
-                    Usability
-                </h4>
-                <h4 class="col-md-6 arrow bold-text" ng-click="open('lg')">
-                    Motion Design
-                </h4>
+                <div ng-repeat="service in services">
+                    <h4 class="col-md-6 arrow bold-text" ng-click="open('lg', $index+1, service)">
+                        {{service}}
+                    </h4>
+                </div>
             </div>
         </div>
         <div class="col-md-12 seperatorgap">
@@ -153,91 +146,90 @@
 </div>
 
 <script>
-    $('.carousel').carousel({
-        interval: 2000
-    });
+            $('.carousel').carousel({
+                interval: 2000
+            });
 
-    $(function () {
-        var player = $('iframe');
-        var playerOrigin = '*';
-        // Listen for messages from the player
-        if (window.addEventListener) {
-            window.addEventListener('message', onMessageReceived, false);
-        }
-        else {
-            window.attachEvent('onmessage', onMessageReceived, false);
-        }
+            $(function () {
+                var player = $('iframe');
+                var playerOrigin = '*';
+                // Listen for messages from the player
+                if (window.addEventListener) {
+                    window.addEventListener('message', onMessageReceived, false);
+                } else {
+                    window.attachEvent('onmessage', onMessageReceived, false);
+                }
 
-        // Handle messages received from the player
-        function onMessageReceived(event) {
-            // Handle messages from the vimeo player only
-            if (!(/^https?:\/\/player.vimeo.com/).test(event.origin)) {
-                return false;
-            }
+                // Handle messages received from the player
+                function onMessageReceived(event) {
+                    // Handle messages from the vimeo player only
+                    if (!(/^https?:\/\/player.vimeo.com/).test(event.origin)) {
+                        return false;
+                    }
 
-            if (playerOrigin === '*') {
-                playerOrigin = event.origin;
-            }
+                    if (playerOrigin === '*') {
+                        playerOrigin = event.origin;
+                    }
 
-            var data = JSON.parse(event.data);
+                    var data = JSON.parse(event.data);
 
-            switch (data.event) {
-                case 'ready':
-                    onReady();
-                    break;
+                    switch (data.event) {
+                        case 'ready':
+                            onReady();
+                            break;
 
-                case 'playProgress':
-                    onPlayProgress(data.data);
-                    break;
+                        case 'playProgress':
+                            onPlayProgress(data.data);
+                            break;
 
-                case 'pause':
-                    onPause();
-                    break;
+                        case 'pause':
+                            onPause();
+                            break;
 
-                case 'finish':
-                    onFinish();
-                    break;
-            }
-        }
+                        case 'finish':
+                            onFinish();
+                            break;
+                    }
+                }
 //        // Call the API when a button is pressed
-        $('#playVideo').on('click', function () {
-            post('play');
-            $('#videoHeroControls').fadeOut('slow');
-        });
-        // Helper function for sending a message to the player
-        function post(action, value) {
-            var data = {
-                method: action
-            };
+                $('#playVideo').on('click', function () {
+                    post('play');
+                    $('#videoHeroControls').fadeOut('slow');
+                });
+                // Helper function for sending a message to the player
+                function post(action, value) {
+                    var data = {
+                        method: action
+                    };
 
-            if (value) {
-                data.value = value;
-            }
+                    if (value) {
+                        data.value = value;
+                    }
 
-            var message = JSON.stringify(data);
-            player[0].contentWindow.postMessage(message, playerOrigin);
-        }
+                    var message = JSON.stringify(data);
+                    player[0].contentWindow.postMessage(message, playerOrigin);
+                }
 
-        function onReady() {
-            console.log("ready");
+                function onReady() {
+                    console.log("ready");
 
-            post('addEventListener', 'pause');
-            post('addEventListener', 'finish');
-            post('addEventListener', 'playProgress');
-        }
+                    post('addEventListener', 'pause');
+                    post('addEventListener', 'finish');
+                    post('addEventListener', 'playProgress');
+                }
 
-        function onPause() {
-            console.log("paused");
-            $('#videoHeroControls').fadeIn('slow');
-        }
+                function onPause() {
+                    console.log("paused");
+                    $('#videoHeroControls').fadeIn('slow');
+                }
 
-        function onFinish() {
-            console.log("finished");
-            $('#videoHeroControls').fadeOut('slow');
-        }
+                function onFinish() {
+                    console.log("finished");
+                    $('#videoHeroControls').fadeOut('slow');
+                }
 
-        function onPlayProgress(data) {
-            console.log("play progress");
-        }
-    });
+                function onPlayProgress(data) {
+                    console.log("play progress");
+                }
+            });
 </script>

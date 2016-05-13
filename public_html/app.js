@@ -30,12 +30,9 @@ var app = angular
                 });
             };
 
-
-            $scope.animationsEnabled = true;
-
             $scope.open = function (size, index) {
                 var modalInstance = $uibModal.open({
-                    animation: $scope.animationsEnabled,
+                    animation: true,
                     templateUrl: 'modal/workDetailModal.html',
                     controller: 'ModalInstanceCtrl',
                     size: size,
@@ -169,14 +166,29 @@ var app = angular
                 }
             };
         })
-        .controller('ContactCtrl', function ($scope, $uibModal, $compile) {
-            $scope.open = function (size) {
+        .controller('ContactCtrl', function ($scope, $uibModal) {
+
+            $scope.careerPositions = [
+                'UX/UI Designer',
+                'Information Designer',
+                'Video & Motion Designer',
+                'UI Developer'
+            ];
+
+            $scope.open = function (size, pageName, careerPosition) {
+
                 var modalInstance = $uibModal.open({
-                    animation: $scope.animationsEnabled,
+                    animation: true,
                     templateUrl: 'modal/careerDetail.html',
                     controller: 'CareerDetailModalInstanceCtrl',
                     size: size,
-                    backdrop: false
+                    backdrop: false,
+                    resolve: {
+                        pageName: pageName,
+                        careerPosition: function () {
+                            return careerPosition;
+                        }
+                    }
                 });
 
                 modalInstance.result.then(function () {
@@ -186,7 +198,13 @@ var app = angular
                 });
             };
         })
-        .controller('CareerDetailModalInstanceCtrl', function ($scope, $uibModalInstance) {
+        .controller('CareerDetailModalInstanceCtrl', function ($scope, $uibModalInstance, pageName, careerPosition) {
+            $scope.getURL = function () {
+                return './data/career/' + pageName + '.html';
+            };
+
+            $scope.header = careerPosition;
+
             $scope.ok = function () {
                 $uibModalInstance.close();
             };
@@ -195,14 +213,40 @@ var app = angular
                 $uibModalInstance.dismiss('cancel');
             };
         })
-        .controller('HomepageCtrl', function ($scope, $uibModal, $compile) {
-            $scope.open = function (size) {
+        .controller('ServiceDetailModalInstanceCtrl', function ($scope, $uibModalInstance, pageName, service) {
+            $scope.getURL = function () {
+                return './data/services/' + pageName + '.html';
+            };
+            $scope.header = service;
+            $scope.ok = function () {
+                $uibModalInstance.close();
+            };
+
+            $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+        })
+        .controller('HomepageCtrl', function ($scope, $uibModal) {
+            $scope.services = [
+                'Product & Service Innovation',
+                'User Experience Design',
+                'Usability',
+                'Motion Design'
+            ];
+
+            $scope.open = function (size, pageName, service) {
                 var modalInstance = $uibModal.open({
-                    animation: $scope.animationsEnabled,
-                    templateUrl: 'modal/careerDetail.html',
-                    controller: 'CareerDetailModalInstanceCtrl',
+                    animation: true,
+                    templateUrl: 'modal/serviceDetail.html',
+                    controller: 'ServiceDetailModalInstanceCtrl',
                     size: size,
-                    backdrop: false
+                    backdrop: false,
+                    resolve: {
+                        pageName: pageName,
+                        service: function () {
+                            return service;
+                        }
+                    }
                 });
 
                 modalInstance.result.then(function () {
